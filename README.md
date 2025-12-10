@@ -90,7 +90,7 @@ services:
       - NET_RAW
 ```
 
-## On DockerHub / GitHub
+## On GitHub
 ___
 * GitHub [psychowood/sniffnet-docker-novnc](https://github.com/psychowood/sniffnet-docker-novnc)
 
