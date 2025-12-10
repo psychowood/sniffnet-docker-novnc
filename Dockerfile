@@ -1,30 +1,37 @@
-FROM debian:bullseye
+#FROM debian:stable-slim
 
-# Install git, supervisor, VNC, & X11 packages
+FROM ghcr.io/gyulyvgc/sniffnet:latest
+# Install supervisor, VNC, & X11 packages
 RUN set -ex; \
     apt-get update; \
     apt-get install -y \
       bash \
-      fluxbox \
+      novnc \
       git \
       net-tools \
-      novnc \
       supervisor \
       x11vnc \
-      xterm \
-      xvfb
-
-# Setup demo environment variables
+      xvfb \
+      xdotool \
+      libxcursor1 \
+      libxkbcommon-x11-0
+ 
+# Setup environment variables
 ENV HOME=/root \
     DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     DISPLAY=:0.0 \
+    WEB_PORT=8088 \
     DISPLAY_WIDTH=1024 \
     DISPLAY_HEIGHT=768 \
-    RUN_XTERM=yes \
-    RUN_FLUXBOX=yes
-COPY . /app
-CMD ["/app/entrypoint.sh"]
-EXPOSE 8080
+    RUST_BACKTRACE=full \
+    ICED_BACKEND=tiny-skia
+
+RUN cp /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html
+
+COPY ./supervisord.conf /app/supervisord.conf
+
+CMD ["supervisord","-c","/app/supervisord.conf"]
+ENTRYPOINT []

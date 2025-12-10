@@ -1,23 +1,17 @@
-version: '2'
 services:
-  ide:
-    image: psharkey/intellij:latest
-#    image: psharkey/netbeans-8.1:latest
+  sniffnet-docker-novnc: 
+    # build with `docker build -t psychowood/sniffnet-docker-novnc .`
+    image: psychowood/sniffnet-docker-novnc:latest
+    container_name: sniffnet-docker-novnc
+    network_mode: host
     environment:
-      - DISPLAY=novnc:0.0
-    depends_on:
-      - novnc
-    networks:
-      - x11
-  novnc:  
-    image: theasp/novnc:latest
-    environment:
-      # Adjust to your screen size
+      - WEB_PORT=8088
+      # Adjust if you want
       - DISPLAY_WIDTH=1600
-      - DISPLAY_HEIGHT=968
-    ports:
-      - "8080:8080"
-    networks:
-      - x11
-networks:
-  x11:
+      - DISPLAY_HEIGHT=1200
+    #If you want to save dumps somewhere persistent, uncomment this and adjust the path
+#    volumes:
+#      - /tmp:/tmp
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
