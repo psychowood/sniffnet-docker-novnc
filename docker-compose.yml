@@ -1,7 +1,7 @@
 services:
   sniffnet-docker-novnc: 
-    # build with `docker build -t sniffnet-docker-novnc .`
-    image: sniffnet-docker-novnc:latest
+    # build with `docker build -t psychowood/sniffnet-docker-novnc .`
+    image: psychowood/sniffnet-docker-novnc:latest
     container_name: sniffnet-docker-novnc
     network_mode: host
     environment:

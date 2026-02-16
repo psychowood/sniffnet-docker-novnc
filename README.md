@@ -1,6 +1,5 @@
 # Sniffnet on noVNC Display Container
 ```
-```
 This image is intended as an experiment to run [Sniffnet](https://github.com/GyulyVGC/sniffnet) on a docker host to analyze traffic for all the configured networks and containers.
 
 Since my host OS is running [burmilla OS](https://github.com/burmilla/os) I don't have x11 available the standard sniffnet docker image couldn't run, so I needed a standalone way to do it.
@@ -73,8 +72,8 @@ You can specify the following variables:
 ```
 services:
   sniffnet-docker-novnc: 
-    # build with `docker build -t sniffnet-docker-novnc .`
-    image: sniffnet-docker-novnc:latest
+    # build with `docker build -t psychowood/sniffnet-docker-novnc .`
+    image: psychowood/sniffnet-docker-novnc:latest
     container_name: sniffnet-docker-novnc
     network_mode: host
     environment:
@@ -88,11 +87,10 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
+
+
 ```
 
-## On GitHub
-___
-* GitHub [psychowood/sniffnet-docker-novnc](https://github.com/psychowood/sniffnet-docker-novnc)
 
 # Thanks
 ___
